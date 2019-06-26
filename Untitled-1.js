@@ -1,43 +1,25 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Drawer from '@material-ui/core/Drawer';
-import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import  {HashRouter as Router, Route} from 'react-router-dom';
+import AppShell from './AppShell'
+import Home from './Home';
+import Texts from './Texts';
+import Words from './Words'
 
-const styles = {
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: 'auto'
-    },
-};
-
-class AppShell extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            toggle: false
-        };
-    }
-    handleDrawerToggle = () => this.setState({ toggle: !this.state.toggle })
-    render() {
-        const { classes } = this.props;
+class App extends React.Component{
+    render(){
         return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <IconButton className={classes.menuButton} color="inherit" onClick={this.handleDrawerToggle}>
-                        <MenuIcon />
-                    </IconButton>
-                </AppBar>
-                <Drawer open={this.state.toggle}>
-                    <MenuItem onClick={this.handleDrawerToggle}>Home</MenuItem>
-                </Drawer>
-            </div>
+            <Router>
+                <AppShell>
+                    <div>
+                        <Route exact path = "/"  Component={Home} />
+                        <Route exact path = "/Texts"  Component={Texts} />
+                        <Route exact path = "/Words"  Component={Words} />
+                    </div>
+                </AppShell>
+            </Router>
+            
         );
     }
 }
 
-export default withStyles(styles)(AppShell);
+export default App;
